@@ -19,4 +19,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Especialidad
+Route::get('/especialidades', 'EspecialidadController@index');
+Route::get('/especialidades/create', 'EspecialidadController@create');
+Route::get('/especialidades/{especialidad}/edit', 'EspecialidadController@edit');
+Route::post('/especialidades', 'EspecialidadController@store');
+Route::put('/especialidades/{especialidad}', 'EspecialidadController@update');
+Route::delete('/especialidades/{especialidad}', 'EspecialidadController@destroy');
+
+//Doctores
+Route::resource('doctors','DoctorController');
 
