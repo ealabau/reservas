@@ -1,6 +1,14 @@
 <!-- Navigation -->
-<h6 class="navbar-heading text-muted">Gestionar Datos</h6>
+<h6 class="navbar-heading text-muted">
+ @if(auth()->user()->role == 'admin') 
+Gestionar Datos
+@else
+Menú
+@endif
+</h6>
+
 <ul class="navbar-nav">
+ @if(auth()->user()->role == 'admin') 
   <li class="nav-item">
     <a class="nav-link" href="/home">
       <i class="ni ni-tv-2 text-red"></i> Dashboard
@@ -17,11 +25,45 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./examples/profile.html">
+    <a class="nav-link" href="/patients">
       <i class="ni ni-satisfied text-info"></i> Pacientes
     </a>
   </li>
+ @elseif(auth()->user()->role == 'doctor')
+  
  
+  <li class="nav-item">
+    <a class="nav-link" href="/schedule">
+      <i class="ni ni-calendar-grid-58 text-danger"></i> Gestionar horario
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/especialidades">
+      <i class="ni ni-time-alarm text-orange"></i> Mis Citas
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="/patients">
+      <i class="ni ni-satisfied text-primary"></i>Mis Pacientes
+    </a>
+  </li>
+ @elseif(auth()->user()->role == 'paciente')
+ 
+ <li class="nav-item">
+    <a class="nav-link" href="/patients">
+      <i class="ni ni-laptop text-primary"></i>Reservar Cita
+    </a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="/especialidades">
+      <i class="ni ni-time-alarm text-orange"></i> Mis Citas
+    </a>
+  </li>
+
+  
+ @endif
   <li class="nav-item">
     <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('formLogout').submit();">
       <i class="ni ni-key-25 "></i> Cerrar sesión
@@ -32,6 +74,7 @@
   </li>
   
 </ul>
+@if(auth()->user()->role == 'admin') 
 <!-- Divider -->
 <hr class="my-3">
 <!-- Heading -->
@@ -50,3 +93,4 @@
   </li>
   
 </ul>
+@endif

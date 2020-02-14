@@ -19,7 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Especialidad
+
+Route::middleware(['auth', 'admin'])->namespace('Admin')->group(function () {
+   
+   // Especialidad
 Route::get('/especialidades', 'EspecialidadController@index');
 Route::get('/especialidades/create', 'EspecialidadController@create');
 Route::get('/especialidades/{especialidad}/edit', 'EspecialidadController@edit');
@@ -29,4 +32,16 @@ Route::delete('/especialidades/{especialidad}', 'EspecialidadController@destroy'
 
 //Doctores
 Route::resource('doctors','DoctorController');
+//Pacientes
+Route::resource('patients','PatientController');
 
+
+});
+
+Route::middleware(['auth', 'doctor'])->namespace('Doctor')->group(function () {
+Route::get('/schedule', 'ScheduleController@edit');
+Route::post('/schedule', 'ScheduleController@store');
+
+
+
+});
